@@ -1,25 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Carga de artículos</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revisor de Artículos Académicos</title>
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+    <div id="app"></div>
 
-<h2>Subir artículo</h2>
+    <!-- Scripts en orden correcto -->
+    <script src="js/storage.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/app.js"></script>
 
-<form id="upload-form">
-    <input type="file" id="file-input" accept=".pdf,.docx,.txt">
-    <br><br>
-
-    <p id="file-info"></p>
-
-    <button id="upload-btn" disabled>Subir archivo</button>
-</form>
-
-<p id="message-area"></p>
-
-<script src="app.js"></script>
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('✅ SW registrado'))
+                    .catch(err => console.log('❌ SW error:', err));
+            });
+        }
+    </script>
 </body>
 </html>
